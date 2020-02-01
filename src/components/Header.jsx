@@ -13,7 +13,9 @@ import {
   IconButton
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
-import { BrowserRouter as Router, Link } from "react-router-dom";
+import Home from "./Home";
+import Booking from "./Booking";
+import { BrowserRouter as Router, Link, Switch, Route } from "react-router-dom";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -118,6 +120,10 @@ const Header = () => {
           <SidePanel />
         </Drawer>
       </div>
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route path="/Booking" component={Booking} />
+      </Switch>
     </Router>
   );
 };
