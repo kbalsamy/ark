@@ -3,26 +3,30 @@ import Header from "./components/Header";
 import Banner from "./components/Banner";
 import Home from "./components/Home";
 import Footer from "./components/Footer";
-import { CssBaseline } from "@material-ui/core";
+import { withStyles } from "@material-ui/core";
 
+const styles = theme => ({
+  root: {
+    [theme.breakpoints.up("md")]: {
+      width: "95%",
+      margin: "auto"
+    }
+  }
+});
 
-export default class App extends Component {
+export default withStyles(styles)(
+  class App extends Component {
+    render() {
+      const { classes } = this.props;
 
-  render() {
-
-
-    return (
-      <CssBaseline>
-
-        <div style={{ width: "90%", margin: "auto" }}>
+      return (
+        <div className={classes.root}>
           <Header />
           <Banner />
           <Home />
           <Footer />
         </div>
-
-      </CssBaseline>
-
-    );
+      );
+    }
   }
-}
+);
