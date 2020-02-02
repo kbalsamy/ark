@@ -3,6 +3,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Home from "./components/Home";
 import Booking from "./components/Booking";
+import Baggage from "./components/Baggage";
 import { withStyles } from "@material-ui/core";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
@@ -27,6 +28,7 @@ export default withStyles(styles)(
             <Switch>
               <Route exact path="/" component={Home} />
               <Route exact path="/Booking" component={Booking} />
+              <Route exact path="/Excess Baggage" component={Baggage} />
             </Switch>
             <Footer />
           </div>

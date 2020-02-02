@@ -23,7 +23,8 @@ const useStyles = makeStyles(theme => ({
   },
 
   title: {
-    flexGrow: 1
+    flexGrow: 1,
+    textDecoration: "none"
   },
 
   ribbon: {
@@ -99,7 +100,13 @@ const Header = () => {
     <div className={classes.root}>
       <AppBar className={classes.ribbon} position="sticky">
         <Toolbar>
-          <Typography className={classes.title} variant="h5">
+          <Typography
+            className={classes.title}
+            variant="h5"
+            component={Link}
+            to="/"
+            color="inherit"
+          >
             Ark
           </Typography>
           <div className={classes.mobileNav}>
