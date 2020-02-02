@@ -10,11 +10,11 @@ import {
   List,
   ListItem,
   Drawer,
-  IconButton
+  IconButton,
+  Breadcrumbs
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
-import Home from "./Home";
-import Booking from "./Booking";
+
 import { BrowserRouter as Router, Link, Switch, Route } from "react-router-dom";
 
 const useStyles = makeStyles(theme => ({
@@ -31,7 +31,8 @@ const useStyles = makeStyles(theme => ({
   },
 
   sidepanel: {
-    width: "240px"
+    width: "240px",
+    marginTop: "10px"
   },
 
   mobileNav: {
@@ -54,10 +55,11 @@ const useStyles = makeStyles(theme => ({
     justifyContent: "center"
   },
 
-  linkStyle: {
-    textDecoration: "none",
-    color: "white",
-    fontWeight: "bold"
+  mobileMenu: {
+    display: "flex",
+    flexDirection: "row",
+    paddingTop: "5px",
+    marginTop: "10px"
   }
 }));
 
@@ -77,54 +79,56 @@ const Header = () => {
       onClick={handleMobileDrawer}
       onkeydown={handleMobileDrawer}
     >
-      <List component="nav">
-        {menu.map((catagory, index) => (
-          <Link key={index} to={`/${catagory}`}>
-            <ListItem button>{catagory}</ListItem>
-          </Link>
-        ))}
-      </List>
+      {menu.map((catagory, index) => (
+        <div className={classes.mobileNav}>
+          <Button
+            component={Link}
+            key={index}
+            color="inherit"
+            fullWidth
+            to={`/${catagory}`}
+          >
+            {catagory}
+          </Button>
+        </div>
+      ))}
     </div>
   );
 
   return (
-    <Router>
-      <div className={classes.root}>
-        <AppBar className={classes.ribbon} position="sticky">
-          <Toolbar>
-            <Typography className={classes.title} variant="h5">
-              Ark
-            </Typography>
-            <div className={classes.mobileNav}>
-              <IconButton color="inherit" onClick={handleMobileDrawer}>
-                <MenuIcon />
-              </IconButton>
-            </div>
-            <div className={classes.navMenu}>
-              <List component="nav" className={classes.menuList}>
-                {menu.map((catagory, index) => (
-                  <Link
-                    key={index}
-                    to={`/${catagory}`}
-                    className={classes.linkStyle}
-                  >
-                    <ListItem button>{catagory}</ListItem>
-                  </Link>
-                ))}
-              </List>
-            </div>
-          </Toolbar>
-        </AppBar>
-        <Banner />
-        <Drawer open={mobileOpen} onClose={handleMobileDrawer} anchor="right">
-          <SidePanel />
-        </Drawer>
-      </div>
-      <Switch>
-        <Route exact path="/" component={Home} />
-        <Route path="/Booking" component={Booking} />
-      </Switch>
-    </Router>
+    <div className={classes.root}>
+      <AppBar className={classes.ribbon} position="sticky">
+        <Toolbar>
+          <Typography className={classes.title} variant="h5">
+            Ark
+          </Typography>
+          <div className={classes.mobileNav}>
+            <IconButton color="inherit" onClick={handleMobileDrawer}>
+              <MenuIcon />
+            </IconButton>
+          </div>
+          <div className={classes.navMenu}>
+            <List component="nav" className={classes.menuList}>
+              {menu.map((catagory, index) => (
+                <Button
+                  component={Link}
+                  key={index}
+                  color="inherit"
+                  to={`/${catagory}`}
+                >
+                  {catagory}
+                </Button>
+              ))}
+            </List>
+          </div>
+        </Toolbar>
+      </AppBar>
+      <Banner />
+
+      <Drawer open={mobileOpen} onClose={handleMobileDrawer} anchor="right">
+        <SidePanel />
+      </Drawer>
+    </div>
   );
 };
 
